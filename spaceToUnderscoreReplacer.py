@@ -9,24 +9,24 @@ import json
 import sys
 
 # Grab the query with the entered text
-originalText = sys.argv[1]
+original_text = sys.argv[1]
 
 # Replace spaces with underscores
-processedText = originalText.replace(' ', '_')
+processed_text = original_text.replace(' ', '_')
 
 # Alfred's JSON expected result
-processedTextJson = {"items": [
+processed_text_json = {"items": [
     {
         "type": "file",
-        "title": processedText,
+        "title": processed_text,
         "subtitle": "Copied to clipboard",
-        "arg": processedText
+        "arg": processed_text
     }
 
 ]}
 
 # Convert the JSON scheme to string
-processedTextJsonString = json.dumps(processedTextJson)
+processed_text_json_string = json.dumps(processed_text_json)
 
 # Pass the resulting JSON string to Alfred
-print processedTextJsonString
+print processed_text_json_string
