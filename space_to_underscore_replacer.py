@@ -15,18 +15,19 @@ original_text = sys.argv[1]
 processed_text = original_text.replace(' ', '_')
 
 # Alfred's JSON expected result
-processed_text_json = {"items": [
-    {
-        "type": "file",
-        "title": processed_text,
-        "subtitle": "Copied to clipboard",
-        "arg": processed_text
-    }
-
-]}
+processed_text_json = {"items":
+                        [
+                            {
+                             "type": "file",
+                             "title": processed_text,
+                             "subtitle": "Copied to clipboard",
+                             "arg": processed_text
+                            }
+                        ]
+                      }
 
 # Convert the JSON scheme to string
 processed_text_json_string = json.dumps(processed_text_json)
 
 # Pass the resulting JSON string to Alfred
-print processed_text_json_string
+print(processed_text_json_string)
