@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 
-""" spaceToUnderscoreReplacer 1.0
+""" space_to_underscore_replacer 1.0
 Alfred Workflow Python script that replaces spaces with underscores in the entered text.
 """
 

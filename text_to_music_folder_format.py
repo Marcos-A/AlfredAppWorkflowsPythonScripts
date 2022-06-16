@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 
-""" texToTitleCase 1.0
-Alfred Workflow Python script that capitalizes every word in a string.
-First letter after a non-alphabet letter is not capitalized.
+""" text_to_music_folder_format 1.0
+Alfred Workflow Python script that formats text as music folder
+names following the pattern "Artist_Name - Album_Name_(year)"
 """
 
 import json

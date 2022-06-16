@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 
-""" texToTitleCase 1.0
+""" text_to_title_case 1.0
 Alfred Workflow Python script that capitalizes every word in a string.
 First letter after a non-alphabet letter is not capitalized.
 """

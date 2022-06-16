@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 
-""" texToLowerCase 1.0
+""" text_to_lower_case 1.0
 Alfred Workflow Python script that converts text to lower case.
 """
 
