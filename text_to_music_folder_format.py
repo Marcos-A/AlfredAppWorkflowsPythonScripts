@@ -24,7 +24,7 @@ if dash_without_spaces:
 else:
     processed_text = processed_text.replace("_-_", " - ")
 # Format the year of release
-release_year_without_parenthesis = re.search("[A-Za-z0-9]+\s[-]\s[A-Za-z]+[_][0-9]{4}$", processed_text)
+release_year_without_parenthesis = re.search("[A-Za-z0-9_,.]+\s[-]\s[A-Za-z_,.]+[_][0-9]{4}$", processed_text)
 if release_year_without_parenthesis:
     release_year = "(" + re.search("[0-9]{4}$", processed_text).group(0) + ")"
     processed_text = re.sub("[0-9]{4}$", release_year, processed_text)
