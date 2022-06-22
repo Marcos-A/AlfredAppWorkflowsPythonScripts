@@ -13,18 +13,22 @@ import re
 # Grab the query with the entered text
 original_text = sys.argv[1]
 
+# Replace undescores with spaces
+processed_text = original_text.replace("_", " ")
 # Capitalize every word
-processed_text = ' '.join([word.capitalize() for word in original_text.split(' ')])
+processed_text = ' '.join([word.capitalize() for word in processed_text.split(' ')])
 # Replace spaces with undescores
 processed_text = processed_text.replace(" ", "_")
+# Replace slashes with ampersands
+processed_text = processed_text.replace("/", "&")
 # Format the dash separating the artist and the album
-dash_without_spaces = re.search("[A-Za-z0-9]+-[A-Za-z0-9]+", processed_text)
+dash_without_spaces = re.search("A-Za-zÀ-ÖØ-öø-ÿ0-9]+-[A-Za-zÀ-ÖØ-öø-ÿ0-9]+", processed_text)
 if dash_without_spaces:
     processed_text = processed_text.replace("-", " - ")
 else:
     processed_text = processed_text.replace("_-_", " - ")
 # Format the year of release
-release_year_without_parenthesis = re.search("[A-Za-z0-9_,.]+\s[-]\s[A-Za-z_,.]+[_][0-9]{4}$", processed_text)
+release_year_without_parenthesis = re.search("[A-Za-zÀ-ÖØ-öø-ÿ0-9_,.]+\s[-]\s[A-Za-zÀ-ÖØ-öø-ÿ_,.]+[_][0-9]{4}$", processed_text)
 if release_year_without_parenthesis:
     release_year = "(" + re.search("[0-9]{4}$", processed_text).group(0) + ")"
     processed_text = re.sub("[0-9]{4}$", release_year, processed_text)
