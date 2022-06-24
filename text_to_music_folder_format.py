@@ -11,42 +11,46 @@ import sys
 import re
 
 # Grab the query with the entered text
-original_text = sys.argv[1]
+text_str = sys.argv[1]
 
-# Replace undescores with spaces
-processed_text = original_text.replace("_", " ")
-# Capitalize every word
-processed_text = ' '.join([word.capitalize() for word in processed_text.split(' ')])
-# Replace spaces with undescores
-processed_text = processed_text.replace(" ", "_")
-# Replace slashes with ampersands
-processed_text = processed_text.replace("/", "&")
-# Format the dash separating the artist and the album
-dash_without_spaces = re.search("A-Za-zÀ-ÖØ-öø-ÿ0-9]+-[A-Za-zÀ-ÖØ-öø-ÿ0-9]+", processed_text)
+# Add spaces before and after dashes
+dash_without_spaces = re.search("[A-Za-zÀ-ÖØ-öø-ÿ0-9_,.\s]+[-][A-Za-zÀ-ÖØ-öø-ÿ0-9_,.()\s]", text_str)
 if dash_without_spaces:
-    processed_text = processed_text.replace("-", " - ")
+    text_str = text_str.replace("-", " - ")
+# Replace undescores with spaces
+text_str = text_str.replace("_", " ")
+# Capitalize every word
+text_str = ' '.join([word.capitalize() for word in text_str.split(' ')])
+# Replace spaces with undescores
+text_str = text_str.replace(" ", "_")
+# Replace slashes with ampersands
+text_str = text_str.replace("/", "&")
+# Format the dash separating the artist and the album
+dash_without_spaces = re.search("A-Za-zÀ-ÖØ-öø-ÿ0-9]+-[A-Za-zÀ-ÖØ-öø-ÿ0-9]+", text_str)
+if dash_without_spaces:
+    text_str = text_str.replace("-", " - ")
 else:
-    processed_text = processed_text.replace("_-_", " - ")
+    text_str = text_str.replace("_-_", " - ")
 # Format the year of release
-release_year_without_parenthesis = re.search("[A-Za-zÀ-ÖØ-öø-ÿ0-9_,.]+\s[-]\s[A-Za-zÀ-ÖØ-öø-ÿ_,.]+[_][0-9]{4}$", processed_text)
+release_year_without_parenthesis = re.search("[A-Za-zÀ-ÖØ-öø-ÿ0-9_,.]+\s[-]\s[A-Za-zÀ-ÖØ-öø-ÿ_,.]+[_][0-9]{4}$", text_str)
 if release_year_without_parenthesis:
-    release_year = "(" + re.search("[0-9]{4}$", processed_text).group(0) + ")"
-    processed_text = re.sub("[0-9]{4}$", release_year, processed_text)
+    release_year = "(" + re.search("[0-9]{4}$", text_str).group(0) + ")"
+    text_str = re.sub("[0-9]{4}$", release_year, text_str)
 
 # Alfred's JSON expected result
-processed_text_json = {"items":
+text_str_json = {"items":
                         [
                             {
                              "type": "file",
-                             "title": processed_text,
+                             "title": text_str,
                              "subtitle": "Copied to clipboard",
-                             "arg": processed_text
+                             "arg": text_str
                             }
                         ]
                       }
 
 # Convert the JSON scheme to string
-processed_text_json_string = json.dumps(processed_text_json)
+text_str_json_string = json.dumps(text_str_json)
 
 # Pass the resulting JSON string to Alfred
-print(processed_text_json_string)
+print(text_str_json_string)
