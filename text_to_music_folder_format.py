@@ -17,7 +17,7 @@ text_str = sys.argv[1]
 text_str = text_str.replace("_", " ")
 
 # Add spaces before and after dashes separating artist and album
-dash_without_spaces = re.search("[A-Za-zÀ-ÖØ-öø-ÿ0-9_,.\s]+^(_)[-]^(_)[A-Za-zÀ-ÖØ-öø-ÿ0-9_,.()\s]", text_str)
+dash_without_spaces = re.search("[A-Za-zÀ-ÖØ-öø-ÿ0-9_,.\s]+[^_][-][^_][A-Za-zÀ-ÖØ-öø-ÿ0-9_,.()\s]+", text_str)
 if dash_without_spaces:
     text_str = text_str.replace("-", " - ")
 
