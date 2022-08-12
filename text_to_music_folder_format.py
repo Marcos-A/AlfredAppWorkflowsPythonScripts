@@ -17,12 +17,63 @@ text_str = sys.argv[1]
 text_str = text_str.replace("_", " ")
 
 # Add spaces before and after dashes separating artist and album
-dash_without_spaces = re.search("[A-Za-zÀ-ÖØ-öø-ÿ0-9_,.\s]+[^_][-][^_][A-Za-zÀ-ÖØ-öø-ÿ0-9_,.()\s]+", text_str)
+dash_without_spaces = re.search("[A-Za-zÀ-ÖØ-öø-ÿ0-9_,.\s]+[^_\s][-][^_\s][A-Za-zÀ-ÖØ-öø-ÿ0-9_,.()\s]+", text_str)
 if dash_without_spaces:
     text_str = text_str.replace("-", " - ")
 
 # Capitalize every word
 text_str = ' '.join([word.capitalize() for word in text_str.split(' ')])
+
+# Convert to lower case prepositions and conjunctions of four or fewer letters
+non_capitalized_words_dict = {
+                              "And": "and",
+                              "As": "as",
+                              "As If": "as if",
+                              "As Long As": "as long as",
+                              "At": "at",
+                              "But": "but",
+                              "By": "by",
+                              "Down": "down",
+                              "Even If": "even if",
+                              "For": "for",
+                              "From": "from",
+                              "If": "if",
+                              "If Only": "if only",
+                              "In": "in",
+                              "Into": "into",
+                              "Like": "like",
+                              "Near": "near",
+                              "Nor": "nor",
+                              "Now That": "now that",
+                              "Of": "of",
+                              "Off": "off",
+                              "On": "on",
+                              "On Top Of": "on top of",
+                              "Once": "once",
+                              "Onto": "onto",
+                              "Or": "or",
+                              "Out Of": "out of",
+                              "Over": "over",
+                              "Past": "past",
+                              "So": "so",
+                              "So That": "so that",
+                              "Than": "than",
+                              "That": "that",
+                              "The": "the",
+                              "Till": "till",
+                              "To": "to",
+                              "Up": "up",
+                              "Upon": "upon",
+                              "When": "when",
+                              "With": "with",
+                              "Yet": "yet"
+                             }
+text_first_word = text_str.split(" ")[0]
+text_without_first_word = ' '.join(text_str.split(" ")[1:])
+for expression in non_capitalized_words_dict.keys():
+    if expression in text_without_first_word:
+        text_without_first_word = text_without_first_word.replace(expression, non_capitalized_words_dict[expression])
+text_str = text_first_word + " " + text_without_first_word
 
 # Replace spaces with undescores
 text_str = text_str.replace(" ", "_")
