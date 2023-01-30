@@ -88,6 +88,11 @@ if dash_without_spaces:
 else:
     text_str = text_str.replace("_-_", " - ")
 
+# Capitalize the first word of the album
+album = text_str.split(" - ")[1]
+album = album[0].upper() + album[1:]
+text_str = text_str.split(" - ")[0] + " - " + album
+
 # Format the year of release
 release_year_without_parenthesis = re.search("[A-Za-zÀ-ÖØ-öø-ÿ0-9_,.]+\s[-]\s[A-Za-zÀ-ÖØ-öø-ÿ_,.]+[_][0-9]{4}$", text_str)
 if release_year_without_parenthesis:
