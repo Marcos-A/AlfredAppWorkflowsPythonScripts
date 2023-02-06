@@ -26,8 +26,12 @@ else:
     words_count_response = str(words_count) + " words"
 
 
+# Replace question and exclamation marks with dots
+no_questions_text = text_str.replace("?", ".")
+no_exclamations_nor_questions_text = no_questions_text.replace("!", ".")
+
 # Remove duplicated dots
-clean_dots_text = re.sub(r'(\.\.)\.*|\.', r'.', text_str)
+clean_dots_text = re.sub(r'(\.\.)\.*|\.', r'.', no_exclamations_nor_questions_text)
 
 # Separate sentences and add them to list
 sentences_list = clean_dots_text.split(".")
