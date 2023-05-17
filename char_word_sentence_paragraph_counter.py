@@ -13,6 +13,16 @@ import re
 # Grab the query with the entered text and remove leading and trailing spaces
 text_str = sys.argv[1].strip()
 
+# Obtain total number of characters
+chars_count = len(text_str)
+
+# Prepare response
+if chars_count == 1:
+    chars_count_response = str(chars_count) + " character"
+else:
+    chars_count_response = str(chars_count) + " characters"
+
+
 # Separate words and add them to list
 words_list = text_str.split()
 
@@ -67,7 +77,9 @@ else:
 
 
 # Prepare response
-words_sentences_paragraphs_count = words_count_response +\
+words_sentences_paragraphs_count = chars_count_response +\
+                                   " · " +\
+                                   words_count_response +\
                                    " · " +\
                                    sentences_count_response +\
                                    " · " +\
