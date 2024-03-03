@@ -11,8 +11,11 @@ import sys
 # Grab the query with the entered text
 original_text = sys.argv[1]
 
+# Merge multiple lines into a single one
+single_line_text = ' '.join(original_text.splitlines())
+
 # Replace spaces with underscores
-processed_text = original_text.replace(' ', '_')
+processed_text = single_line_text.replace(' ', '_')
 
 # Alfred's JSON expected result
 processed_text_json = {"items":
